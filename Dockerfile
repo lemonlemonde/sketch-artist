@@ -15,9 +15,11 @@ RUN arch=$(uname -m) && \
     exit 1; \
     fi && \
     wget $MINICONDA_URL -O miniconda.sh && \
-    mkdir -p /root/.conda && \
-    bash miniconda.sh -b -p /root/miniconda3 && \
+    mkdir -p /opt/.conda && \
+    bash miniconda.sh -b -p /opt/miniconda3 && \
     rm -f miniconda.sh
+
+ENV PATH=/opt/miniconda3/bin:$PATH
 
 RUN mkdir sketch-artist
 COPY * ./sketch-artist
@@ -26,10 +28,10 @@ COPY * ./sketch-artist
 WORKDIR /sketch-artist
 
 # startup script
-# RUN chmod 777 startup.sh
+RUN chmod 777 startup.sh
 
 # user, no longer root
 RUN useradd -m artist
 USER artist
 
-CMD ["startup.sh"]
+CMD ["./startup.sh"]

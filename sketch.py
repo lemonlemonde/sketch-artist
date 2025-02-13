@@ -5,12 +5,12 @@ import requests
 import torch
 from io import BytesIO
 
-from diffusers import StableDiffusionInpaintPipeline
+from diffusers import StableDiffusionPipeline, StableDiffusionInpaintPipeline
 
 
 # ========= Initial sketch =========
 prompt = input("Initial prompt for sketch: ")
-init_pipeline = StableDiffusionInpaintPipeline.from_pretrained(
+init_pipeline = StableDiffusionPipeline.from_pretrained(
     "runwayml/stable-diffusion-v1-5",
     torch_dtype=torch.float16,
 )
