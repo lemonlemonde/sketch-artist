@@ -1,6 +1,8 @@
 #!/bin/bash
 
-pip3 install ./env.yml
+conda env create -f ./env.yml
+
+conda activate sketch-artist
 
 echo ====== welcome! ======
 /bin/bash
