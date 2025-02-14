@@ -13,20 +13,17 @@ prompt = input("Initial prompt for sketch: ")
 init_pipeline = StableDiffusionPipeline.from_pretrained(
     "runwayml/stable-diffusion-v1-5",
     torch_dtype=torch.float16,
+    use_safetensors=True,
+    variant="fp16",
 )
-# init_pipeline = init_pipeline.to("cuda")
+init_pipeline = init_pipeline.to("cuda")
 init_img = init_pipeline(prompt = prompt).images[0]
 init_img = init_img.resize((512, 512))
 init_img.show()
 
 # ========= Inpainting =========
-pipeline = StableDiffusionInpaintPipeline.from_pretrained(
-    "runwayml/stable-diffusion-inpainting",
-    torch_dtype=torch.float16,
-    use_safetensors=True,
-    variant="fp16",
-)
-# pipeline = pipeline.to("cuda")
+pipeline = StableDiffusionInpaintPipeline.from_pretrained(**init_pipeline.components)
+pipeline = pipeline.to("cuda")
 
 # ========== User provides mask ==========
 # TODO: make this interactive with UI
@@ -47,7 +44,7 @@ mask_draw.rectangle((512,512), fill="#000000")
 mask_draw.rectangle(coords, fill="#ffffff")
 mask_img.show()
 
-prompt = input("What would you like to change? ")
+prompt = input("What would you like to change?: ")
 
 # generate inpainted image
 new_image = pipeline(prompt=prompt, image=init_img, mask_image=mask_img).images[0]

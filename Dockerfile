@@ -2,7 +2,7 @@ FROM ubuntu:22.04
 
 RUN apt-get update
 RUN apt-get install -y python3 python3-pip
-RUN apt-get install -y wget
+RUN apt-get install -y wget git
 
 # miniconda
 RUN arch=$(uname -m) && \
@@ -21,17 +21,17 @@ RUN arch=$(uname -m) && \
 
 ENV PATH=/opt/miniconda3/bin:$PATH
 
-RUN mkdir sketch-artist
-COPY * ./sketch-artist
-
 # working directory within the container
+RUN git clone https://github.com/lemonlemonde/sketch-artist.git
 WORKDIR /sketch-artist
 
-# startup script
-RUN chmod 777 startup.sh
-
-# user, no longer root
 RUN useradd -m artist
+
+# give access to git, startup script, etc.
+RUN chown -R artist:artist /sketch-artist
+RUN chmod -R u+rwx /sketch-artist
+
+# no longer root
 USER artist
 
-CMD ["./startup.sh"]
+CMD ["/sketch-artist/startup.sh"]
