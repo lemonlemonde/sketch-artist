@@ -7,7 +7,7 @@ echo "------ Done init bash ------"
 # make it default :p
 # echo "source activate sketch-artist" > ~/.bashrc
 
-conda env create -f ./env_test.yml
+conda env create -f ./env.yml
 echo "------ Done creating env ------"
 
 conda activate sketch-artist
