@@ -1,17 +1,8 @@
 #!/bin/bash
 
-conda init bash
-source ~/.bashrc
-echo "------ Done init bash ------"
-
-# make it default :p
-# echo "source activate sketch-artist" > ~/.bashrc
-
-conda env create -f ./env.yml
-echo "------ Done creating env ------"
-
-conda activate sketch-artist
-
+# pip installs from requirements.txt
+pip install -r requirements.txt
 
 echo ====== Welcome! ======
+echo ------ Use `python3 sketch.py` to get started :) ------
 /bin/bash
