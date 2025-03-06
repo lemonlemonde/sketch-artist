@@ -5,7 +5,7 @@ import requests
 import torch
 from io import BytesIO
 
-from diffusers import DiffusionPipeline, AutoPipelineForInpainting
+from diffusers import DiffusionPipeline, StableDiffusionInpaintPipeline
 
 # ========= Make pipelines =========
 init_pipeline = DiffusionPipeline.from_pretrained("segmind/tiny-sd", torch_dtype=torch.float16)
