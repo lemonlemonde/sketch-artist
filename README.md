@@ -11,5 +11,6 @@ docker run --gpus all --runtime nvidia -it sketch-artist:latest
 python3 sketch.py
 
 docker ps -a
-docker cp <container_id>:<file_path> <local_rel_path>
+docker cp <container_id>:<file or dir path> <local_rel_path>
+docker cp b1a845f4f7ab:/sketch-artist/imgs/ .
 ```
