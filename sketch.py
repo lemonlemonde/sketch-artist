@@ -11,14 +11,14 @@ from diffusers import DiffusionPipeline, AutoPipelineForInpainting
 init_pipeline = DiffusionPipeline.from_pretrained("segmind/tiny-sd", torch_dtype=torch.float16)
 init_pipeline = init_pipeline.to("cuda")
 
-pipeline = AutoPipelineForInpainting.from_pretrained("gpustack/stable-diffusion-xl-inpainting-1.0-GGUF", torch_dtype=torch.float16)
-# pipeline = StableDiffusionInpaintPipeline.from_pretrained(**init_pipeline.components)
-# pipeline = StableDiffusionInpaintPipeline.from_pretrained(
-#     "runwayml/stable-diffusion-inpainting",
-#     torch_dtype=torch.float16,
-#     use_safetensors=True,
-#     variant="fp16",
-# )
+# pipeline = AutoPipelineForInpainting.from_pretrained("gpustack/stable-diffusion-xl-inpainting-1.0-GGUF", torch_dtype=torch.float16)
+pipeline = StableDiffusionInpaintPipeline.from_pretrained(**init_pipeline.components)
+pipeline = StableDiffusionInpaintPipeline.from_pretrained(
+    "runwayml/stable-diffusion-inpainting",
+    torch_dtype=torch.float16,
+    use_safetensors=True,
+    variant="fp16",
+)
 pipeline = pipeline.to("cuda")
 
 
@@ -42,7 +42,7 @@ while (True):
     draw = ImageDraw.Draw(init_img)
     draw.rectangle(coords, outline="red", width=5)
     init_img.show()
-    init_img.save("redmask_" str(iter) + ".png")
+    init_img.save("redmask_" + str(iter) + ".png")
 
     # create mask
     # black background

@@ -6,8 +6,8 @@ RUN apt-get install -y wget git
 
 
 # working directory within the container
-RUN git clone https://github.com/lemonlemonde/sketch-artist.git
 WORKDIR /sketch-artist
+COPY . .
 
 RUN useradd -m artist
 
