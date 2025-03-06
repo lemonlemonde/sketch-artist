@@ -5,15 +5,16 @@ import requests
 import torch
 from io import BytesIO
 
-from diffusers import StableDiffusionPipeline, StableDiffusionInpaintPipeline
+from diffusers import DiffusionPipeline
 
 # ========= Make pipelines =========
-init_pipeline = StableDiffusionPipeline.from_pretrained(
-    "runwayml/stable-diffusion-v1-5",
-    torch_dtype=torch.float16,
-    use_safetensors=True,
-    variant="fp16",
-)
+# init_pipeline = StableDiffusionPipeline.from_pretrained(
+#     "runwayml/stable-diffusion-v1-5",
+#     torch_dtype=torch.float16,
+#     use_safetensors=True,
+#     variant="fp16",
+# )
+init_pipeline = DiffusionPipeline.from_pretrained("segmind/tiny-sd", torch_dtype=torch.float16)
 init_pipeline = init_pipeline.to("cuda")
 
 # pipeline = StableDiffusionInpaintPipeline.from_pretrained(**init_pipeline.components)
@@ -31,6 +32,7 @@ prompt = input("Initial prompt for sketch: ")
 init_img = init_pipeline(prompt = prompt).images[0]
 init_img = init_img.resize((512, 512))
 init_img.show()
+init_img.save()
 
 while (True):
 
