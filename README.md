@@ -1,5 +1,4 @@
-### What is?
-
+# TL;DR?
 
 
 Interact through CLI to generate an image and in-paint (modify) parts of the image until you're done!
@@ -8,7 +7,7 @@ Interact through CLI to generate an image and in-paint (modify) parts of the ima
 > Meant to be run on a Jetson Orin Nano Developer Kit with updated firmware.
 > https://developer.nvidia.com/embedded/learn/get-started-jetson-orin-nano-devkit#prepare
 
-Process:
+**Process:**
 1. Describe an image
 2. View the image 🤔 
     - (need to copy onto host machine)
@@ -21,7 +20,10 @@ Process:
 > ℹ️ **Info:** 
 > Each image generation will take a few minutes 🫠
 
-### Quick Start
+
+---
+
+## Quick Start
 
 1. Build docker container
 ```shell
@@ -51,9 +53,10 @@ docker cp <container_id>:<file or dir path> <local_rel_path>
 
 ```
 
+---
+---
 
-
-### Tech Stack
+## Tech Stack
 - diffusion pipeline
     - `segmind/tiny-sd`
 - stable diffusion inpainting pipeline
