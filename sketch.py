@@ -1,4 +1,4 @@
-# Code Source:https://huggingface.co/docs/diffusers/using-diffusers/inpaint
+# Reference: https://huggingface.co/docs/diffusers/using-diffusers/inpaint
 import PIL
 from PIL import Image, ImageDraw
 import requests
